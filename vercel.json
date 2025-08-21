@@ -1,0 +1,12 @@
+{
+  "routes": [
+    {
+      "src": "/api/audio/(.*)",
+      "dest": "/tmp/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.js"
+    }
+  ]
+}
