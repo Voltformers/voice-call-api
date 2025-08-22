@@ -11,7 +11,9 @@ export async function POST(req: Request) {
     const filePath = path.join('/tmp', filename);
     fs.writeFileSync(filePath, buffer);
 
-    const publicUrl = `${req.headers.get('host')?.startsWith('http') ? '' : 'https://'}${req.headers.get('host')}/api/audio/${filename}`;
+    const host = req.headers.get('host');
+    const protocol = host?.includes('localhost') ? 'http' : 'https';
+    const publicUrl = `${protocol}://${host}/api/audio/${filename}`;
 
     return NextResponse.json({ url: publicUrl });
   } catch (error) {
